@@ -10,11 +10,9 @@ export const QueryProvider = ({ children }: { children: ReactNode }) => {
                     queries: {
                         retry: 3,
                         staleTime: 1000 * 60 * 5, // 5 minutes
-                        cacheTime: 1000 * 60 * 10, // 10 minutes
-                        refetchWindowFocus: true,
-                        enabled: true,
-
+                        // cacheTime: 1000 * 60 * 10, // 10 minutes
                         refetchOnWindowFocus: true,
+                        enabled: true,
                     },
                 },
             })
