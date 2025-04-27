@@ -1,6 +1,6 @@
 "use client";
 
-import React, { use } from "react";
+import React, { ChangeEvent, use, useEffect, useState } from "react";
 import Button from "./Button";
 import { ArrowDown, SearchIcon } from "@/assets/icons";
 import Input from "./Input";
@@ -14,10 +14,48 @@ import { getCategories } from "@/service/getCategories";
 import Link from "next/link";
 import Image from "next/image";
 import { IMG_API } from "@/hooks/getEnv";
+import { instance } from "@/hooks/instance";
+import Debounce from "@/hooks/debaunce";
+import { HeaderFormType } from "@/types/ActionType";
 
 const HeaderForm = () => {
     const t = useTranslations("HeaderTop");
-    const { data, isLoading, isError } = getCategories();
+    const { data, isError } = getCategories();
+    const [searchValue, setSearchValue] = useState<string>("");
+    const [showSearch, setShowSearch] = useState<boolean>(false);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+    function handleSearch(e: ChangeEvent<HTMLInputElement>) {
+        setSearchValue(e.target.value);
+        setIsLoading(true);
+        setShowSearch(true);
+
+        if (e.target.value.length === 0) {
+            setShowSearch(false);
+            setIsLoading(false);
+        }
+    }
+
+    function handleSearchClick(name: string) {
+        setSearchValue(name);
+        setShowSearch(false);
+        setIsLoading(false);
+    }
+
+    const searchWaitingValue = Debounce(searchValue, 1000);
+    useEffect(() => {
+        if (searchWaitingValue) {
+            instance()
+                .get("/categories/search", {
+                    params: { name: searchWaitingValue },
+                })
+                .then((res) => {
+                    setSearchResult(res.data);
+                });
+            setIsLoading(false);
+        }
+    }, [searchWaitingValue]);
+
+    const [searchResult, setSearchResult] = useState<HeaderFormType[]>([]);
 
     return (
         <div className="flex items-center gap-5">
@@ -74,9 +112,7 @@ const HeaderForm = () => {
                             ))}
                     </div>
 
-                    {/* Right Content */}
                     <div className="w-3/4 pl-6 grid grid-cols-2 gap-10 pt-[20px]">
-                        {/* Smartfonlar */}
                         <div>
                             <h3 className="font-semibold mb-2">Smartfonlar</h3>
                             <ul className="space-y-1 text-sm text-gray-700">
@@ -130,17 +166,42 @@ const HeaderForm = () => {
             {/* Search Input */}
             <div className="w-[518px] relative">
                 <Input
+                    value={searchValue}
+                    onchange={handleSearch}
                     placeholder={t("search")}
                     type="text"
                     extraStyle="!w-full"
                 />
-                <div className="absolute right-0 top-0 h-full flex items-center ">
-                    <Button
-                        extraStyle="!w-[58px] !h-[100%] !p-0"
-                        icon={<SearchIcon />}
-                        iconPosition="right"
-                    />
-                </div>
+                <Button
+                    extraStyle="!w-[58px] !h-[58px] !p-0 absolute top-0 bottom-0 right-0"
+                    icon={<SearchIcon />}
+                    iconPosition="right"
+                />
+
+                <ul
+                    className={`absolute ${
+                        showSearch
+                            ? `${
+                                  searchResult.length > 2
+                                      ? "h-[300px] overflow-auto"
+                                      : "h-auto"
+                              }   py-[20px] `
+                            : "h-0 overflow-hidden"
+                    }  duration-300 top-full bg-white shadow w-[260px] flex flex-col absolute z-100 mt-[12px]`}
+                >
+                    {isLoading
+                        ? "Loading..."
+                        : showSearch &&
+                          searchResult.map((item) => (
+                              <li
+                                  onClick={() => handleSearchClick(item.name)}
+                                  className=" cursor-pointer pl-4 py-2 border-b text-[#545D6A] border-[#545D6A] hover:bg-gray-100"
+                                  key={item.id}
+                              >
+                                  {item.name}
+                              </li>
+                          ))}
+                </ul>
             </div>
         </div>
     );
