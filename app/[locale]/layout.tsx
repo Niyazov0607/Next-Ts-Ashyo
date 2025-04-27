@@ -4,6 +4,7 @@ import { QueryProvider } from "@/query/QueryProvider";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
+import Layout from "@/features";
 
 export const metadata: Metadata = {
     title: "Ashyo",
@@ -29,7 +30,9 @@ export default async function RootLayout({
             </head>
             <body className={` antialiased`}>
                 <NextIntlClientProvider>
-                    <QueryProvider>{children}</QueryProvider>
+                    <QueryProvider>
+                        <Layout>{children}</Layout>
+                    </QueryProvider>
                 </NextIntlClientProvider>
             </body>
         </html>

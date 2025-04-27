@@ -65,14 +65,29 @@ const HeaderTop = () => {
                         +998 (71) 123-45-67
                     </Link>
                     <Select value={lang} onValueChange={changeLang}>
-                        <SelectTrigger className="w-[65px] border-none bg-none shadow-none outline-none focus:outline-none focus:ring-0">
+                        <SelectTrigger className="w-[65px] cursor-pointer border-none bg-none shadow-none outline-none focus:outline-none focus:ring-0 ">
                             <SelectValue>{lang}</SelectValue>
                         </SelectTrigger>
                         <SelectContent>
                             <SelectGroup>
-                                <SelectItem value="uz">uz</SelectItem>
-                                <SelectItem value="en">en</SelectItem>
-                                <SelectItem value="ru">ru</SelectItem>
+                                <SelectItem
+                                    className="cursor-pointer"
+                                    value="uz"
+                                >
+                                    uz
+                                </SelectItem>
+                                <SelectItem
+                                    className="cursor-pointer"
+                                    value="en"
+                                >
+                                    en
+                                </SelectItem>
+                                <SelectItem
+                                    className="cursor-pointer"
+                                    value="ru"
+                                >
+                                    ru
+                                </SelectItem>
                             </SelectGroup>
                         </SelectContent>
                     </Select>

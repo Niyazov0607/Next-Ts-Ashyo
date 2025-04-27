@@ -9,7 +9,9 @@ const Button: React.FC<ButtonType> = ({
     extraStyle,
 }) => {
     return (
-        <button className="bg-[#134E9B] ${extraStyle} justify-center text-white  font-bold py-[17px] px-[25px] rounded-[6px] flex items-center justify-center gap-2 hover:bg-[#0E3A7D] transition duration-300 ease-in-out cursor-pointer">
+        <button
+            className={`bg-[#134E9B] ${extraStyle} justify-center text-white font-bold py-[17px] px-[25px] rounded-[6px] flex items-center justify-center gap-2 hover:bg-[#0E3A7D] transition duration-300 ease-in-out cursor-pointer`}
+        >
             {icon && iconPosition === "left" && icon}
             {text}
             {icon && iconPosition === "right" && icon}

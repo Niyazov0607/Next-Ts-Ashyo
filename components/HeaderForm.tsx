@@ -11,6 +11,9 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useTranslations } from "next-intl";
 import { getCategories } from "@/service/getCategories";
+import Link from "next/link";
+import Image from "next/image";
+import { IMG_API } from "@/hooks/getEnv";
 
 const HeaderForm = () => {
     const t = useTranslations("HeaderTop");
@@ -18,15 +21,16 @@ const HeaderForm = () => {
 
     return (
         <div className="flex items-center gap-5">
-            {/* Categories Dropdown */}
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                     <div>
-                        <Button
-                            text={t("category")}
-                            iconPosition="right"
-                            icon={<ArrowDown />}
-                        />
+                        <DropdownMenuTrigger asChild>
+                            <Button
+                                text={t("category")}
+                                iconPosition="right"
+                                icon={<ArrowDown />}
+                            />
+                        </DropdownMenuTrigger>
                     </div>
                 </DropdownMenuTrigger>
 
@@ -34,7 +38,6 @@ const HeaderForm = () => {
                     className="w-[1185px] h-[570px] flex z-50 ml-[-230px] bg-white p-0 rounded-none"
                     align="start"
                 >
-                    {/* Left Sidebar */}
                     <div className="w-1/4 pl-10 pt-[20px] space-y-4 bg-[#EBEFF3] h-full">
                         {isLoading && (
                             <div className="text-sm text-gray-500">
@@ -51,9 +54,22 @@ const HeaderForm = () => {
                             data?.map((item: any) => (
                                 <div
                                     key={item.id}
-                                    className="flex items-center gap-2 text-sm text-gray-700 hover:text-blue-500 cursor-pointer"
+                                    className="flex items-center gap-2 text-sm text-gray-700  hover:text-blue-500 cursor-pointer"
                                 >
-                                    {item.name}
+                                    <Link
+                                        href={`/category/${item.id}`}
+                                        className="flex items-center gap-2"
+                                    >
+                                        <Image
+                                            className="w-[24px] h-[24px]"
+                                            src={`${IMG_API}/${item.icon}`}
+                                            alt="category"
+                                            width={24}
+                                            height={24}
+                                            priority
+                                        />
+                                        {item.name}
+                                    </Link>
                                 </div>
                             ))}
                     </div>
@@ -118,7 +134,7 @@ const HeaderForm = () => {
                     type="text"
                     extraStyle="!w-full"
                 />
-                <div className="absolute right-0 top-0 h-full flex items-center">
+                <div className="absolute right-0 top-0 h-full flex items-center ">
                     <Button
                         extraStyle="!w-[58px] !h-[100%] !p-0"
                         icon={<SearchIcon />}
