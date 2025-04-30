@@ -6,5 +6,14 @@
         "contacts": "Contacts",
         "category": "Category",
         "search": "What are you looking for?"
+    },
+    "HeaderBottom": {
+        "laptops": "Laptops",
+        "airConditioners": "Air Conditioners",
+        "smartphones": "Smartphones",
+        "refrigerators": "Refrigerators",
+        "washingMachines": "Washing Machines",
+        "televisions": "Televisions",
+        "vacuumCleaners": "Vacuum Cleaners"
     }
 }

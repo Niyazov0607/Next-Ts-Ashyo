@@ -6,5 +6,14 @@
         "contacts": "Biz bilan bog'laning",
         "category": "Kategoriya",
         "search": "Nima qidiryapsiz?"
+    },
+    "HeaderBottom": {
+        "laptops": "Noutbuklar",
+        "airConditioners": "Konditsionerlar",
+        "smartphones": "Smartfonlar",
+        "refrigerators": "Muzlatgichlar",
+        "washingMachines": "Kir yuvish mashinalari",
+        "televisions": "Televizorlar",
+        "vacuumCleaners": "Changyutgichlar"
     }
 }

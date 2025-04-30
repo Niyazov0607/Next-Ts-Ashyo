@@ -1,14 +1,10 @@
 "use client";
 import { instance } from "@/hooks/instance";
+import { CategoryType } from "@/types/CategoryType";
 import { useQuery } from "@tanstack/react-query";
 
-type Category = {
-    id: number;
-    name: string;
-};
-
 export const getCategories = () => {
-    const { data, isLoading, isError } = useQuery<Category[]>({
+    const { data, isLoading, isError } = useQuery<CategoryType[]>({
         queryKey: ["categories"],
         queryFn: async () => {
             const response = await instance().get("/categories/all", {

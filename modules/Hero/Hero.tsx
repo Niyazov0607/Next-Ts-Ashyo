@@ -14,7 +14,6 @@ import { BannersType } from "@/types/BannersType";
 
 const Hero = () => {
     const { data, isLoading, isError } = GetBanners();
-    console.log(data, "banners");
 
     if (isLoading) {
         return (
@@ -39,8 +38,8 @@ const Hero = () => {
     }
 
     return (
-        <div className="bg-[#F3F0F0]">
-            <div className="containers">
+        <div className="bg-[#F3F0F0] ">
+            <div className="containers ">
                 <Swiper
                     pagination={{ clickable: true }}
                     modules={[Pagination, Autoplay]}
@@ -52,8 +51,8 @@ const Hero = () => {
                 >
                     {data?.map((item: BannersType) => (
                         <SwiperSlide key={item.id}>
-                            <div className="relative w-full h-[500px] flex items-center justify-between px-8">
-                                <div className="max-w-[500px] z-10">
+                            <div className="relative w-full h-[500px] flex items-center  justify-between px-8">
+                                <div className="max-w-[500px]">
                                     <h2 className="text-4xl font-black mb-4 text-[#0A1729]">
                                         {item.name}
                                     </h2>
@@ -65,7 +64,7 @@ const Hero = () => {
                                     </button>
                                 </div>
                                 <Image
-                                    className="absolute top-0 bottom-0 right-0 object-cover z-0"
+                                    className="absolute top-0 bottom-0 right-0 object-cover z-0 w-[500px] h-[500px]"
                                     src={`${IMG_API}/${item.image}`}
                                     alt={item.name}
                                     width={550}

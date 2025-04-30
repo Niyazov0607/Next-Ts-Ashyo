@@ -17,6 +17,7 @@ import { IMG_API } from "@/hooks/getEnv";
 import { instance } from "@/hooks/instance";
 import Debounce from "@/hooks/debaunce";
 import { HeaderFormType } from "@/types/ActionType";
+import { Skeleton } from "./ui/skeleton";
 
 const HeaderForm = () => {
     const t = useTranslations("HeaderTop");
@@ -58,7 +59,7 @@ const HeaderForm = () => {
     const [searchResult, setSearchResult] = useState<HeaderFormType[]>([]);
 
     return (
-        <div className="flex items-center gap-5">
+        <div className="flex items-center gap-5 relative">
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                     <div>
@@ -163,8 +164,7 @@ const HeaderForm = () => {
                 </DropdownMenuContent>
             </DropdownMenu>
 
-            {/* Search Input */}
-            <div className="w-[518px] relative">
+            <div className="w-[518px] relative ">
                 <Input
                     value={searchValue}
                     onchange={handleSearch}
@@ -177,25 +177,35 @@ const HeaderForm = () => {
                     icon={<SearchIcon />}
                     iconPosition="right"
                 />
-
                 <ul
-                    className={`absolute ${
+                    className={`!z-[9999999] ${
                         showSearch
                             ? `${
                                   searchResult.length > 2
-                                      ? "h-[300px] overflow-auto"
+                                      ? "h-[300px] overflow-auto "
                                       : "h-auto"
-                              }   py-[20px] `
+                              } py-[20px]`
                             : "h-0 overflow-hidden"
-                    }  duration-300 top-full bg-white shadow w-[260px] flex flex-col absolute z-100 mt-[12px]`}
+                    } duration-300 top-full bg-white shadow w-[260px] flex flex-col absolute !z-50 mt-[12px]`}
                 >
                     {isLoading
-                        ? "Loading..."
+                        ? Array.from({ length: searchResult.length || 0 }).map(
+                              (_, index) => (
+                                  <li
+                                      key={index}
+                                      className="flex items-center space-x-4 px-4 py-2"
+                                  >
+                                      <div className="flex flex-col space-y-2">
+                                          <Skeleton className="h-4 w-[230px] rounded-md bg-gray-300 animate-pulse" />
+                                      </div>
+                                  </li>
+                              )
+                          )
                         : showSearch &&
                           searchResult.map((item) => (
                               <li
                                   onClick={() => handleSearchClick(item.name)}
-                                  className=" cursor-pointer pl-4 py-2 border-b text-[#545D6A] border-[#545D6A] hover:bg-gray-100"
+                                  className="cursor-pointer pl-4 py-2 border-b text-[#545D6A] border-[#545D6A] hover:bg-gray-100"
                                   key={item.id}
                               >
                                   {item.name}

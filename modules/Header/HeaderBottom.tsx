@@ -5,6 +5,7 @@ import { getCategories } from "@/service/getCategories";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Terminal } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 const HeaderBottom = () => {
     const { data, isLoading, isError } = getCategories();
