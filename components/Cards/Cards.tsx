@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { FC } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -12,7 +12,8 @@ import Image from "next/image";
 import Button from "../Button";
 import { CompareIcon } from "@/assets/icons";
 import { ShoppingBag } from "lucide-react";
-import { Skeleton } from "@/components/ui/skeleton"; 
+import { Skeleton } from "@/components/ui/skeleton";
+import { useRouter } from "@/i18n/navigation";
 
 function formatNumberWithSpaces(num: number | string): string {
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
@@ -40,13 +41,14 @@ function SkeletonCard() {
     );
 }
 
-const Cards = () => {
-    const { data, isLoading, isError } = getCards();
+const Cards: FC<{ title: string; api: string }> = ({ title, api }) => {
+    const { data, isLoading, isError } = getCards(api);
+    const router = useRouter();
 
     return (
         <div className="cards pb-[80px] justify-center items-center">
             <div className="containers !mb-[50px]">
-                <h2 className="text-[32px] font-[700]">Most popular product</h2>
+                <h2 className="text-[32px] font-[700]">{title}</h2>
             </div>
             <Swiper
                 slidesPerView={"auto"}
@@ -67,9 +69,12 @@ const Cards = () => {
                     : data?.map((item: CardType) => (
                           <SwiperSlide
                               key={item.id}
-                              className="flex flex-col justify-center items-center !w-[273px] wrapper"
+                              className="relative flex flex-col justify-center items-center !w-[273px] wrapper ml-[6px] px-[1px]"
                           >
-                              <div className="bg-[#EBEFF3] items-center justify-center py-[43px] px-[33px] w-full rounded-[8px] ">
+                              <div
+                                  onClick={() => router.push(`${item.id}`)}
+                                  className="cursor-pointer bg-[#EBEFF3] items-center justify-center py-[43px] px-[33px] w-full rounded-[8px] "
+                              >
                                   <Image
                                       className="w-[202px] h-[202px] object-contain justify-center items-center transition-transform duration-300 hover:scale-110"
                                       src={`${IMG_API}/${item.image}`}
@@ -78,9 +83,17 @@ const Cards = () => {
                                       alt="cards"
                                       priority
                                   />
+                                  {item.is_aksiya && (
+                                      <span className="text-[#E81504] bg-[#FFFFFF] py-[7px] px-[10px] rounded-[5px] absolute top-[15px] left-[25px]">
+                                          Aksiyada
+                                      </span>
+                                  )}
                               </div>
                               <div>
-                                  <p className="line-clamp-2 text-[16px] mt-[16px] mb-[28px] text-[#545D6A]">
+                                  <p
+                                      onClick={() => router.push(`${item.id}`)}
+                                      className="line-clamp-2 text-[16px] mt-[16px] mb-[28px] text-[#545D6A] cursor-pointer"
+                                  >
                                       {item.description}
                                   </p>
                                   <div className="flex items-end gap-[10px]">

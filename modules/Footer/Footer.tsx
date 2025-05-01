@@ -14,7 +14,7 @@ import Link from "next/link";
 
 const Footer = () => {
     return (
-        <div className="containers mt-[100px] flex items-center justify-between gap-[100px] py-[50px]">
+        <div className="containers mt-[100px] flex items-center justify-between gap-[100px] mt-[60px] mb-[89px]">
             <div>
                 <h2>Bizning ijtimoiy tarmoqlarda</h2>
                 <div className="flex items-center  gap-[20px] mt-[20px]">

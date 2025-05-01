@@ -6,13 +6,14 @@ import {
 } from "@/assets/icons";
 import HeaderActions from "@/components/HeaderActions";
 import React from "react";
+import { Auth } from "./Auth";
 
 const HeaderCenterActions = () => {
     const actions = [
         { id: 1, icon: <CompareIcon />, actionCount: 2 },
         { id: 2, icon: <LikeIcon />, actionCount: 11 },
         { id: 3, icon: <ShoppingCartIcon />, actionCount: 7 },
-        { id: 4, icon: <ProfileIcon />, actionCount: 0 },
+        { id: 4, icon: <Auth />, actionCount: 0 },
     ];
 
     return (
