@@ -10,6 +10,14 @@ const config: Config = {
     ],
     theme: {
         extend: {
+            screens: {
+                xs: "356px",
+                sm: "640px",
+                md: "768px",
+                lg: "1024px",
+                xl: "1280px",
+                "2xl": "1536px",
+            },
             colors: {
                 background: "hsl(var(--background))",
                 foreground: "hsl(var(--foreground))",
@@ -100,4 +108,5 @@ const config: Config = {
     },
     plugins: [require("tailwindcss-animate")],
 };
+
 export default config;

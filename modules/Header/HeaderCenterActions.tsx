@@ -17,7 +17,7 @@ const HeaderCenterActions = () => {
     ];
 
     return (
-        <div className="flex items-center gap-[15px] justify-center cursor-pointer">
+        <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-[15px] justify-center cursor-pointer">
             {actions.map((action) => (
                 <HeaderActions
                     key={action.id}

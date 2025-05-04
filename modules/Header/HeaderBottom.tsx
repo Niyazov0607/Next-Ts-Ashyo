@@ -5,7 +5,7 @@ import { getCategories } from "@/service/getCategories";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Terminal } from "lucide-react";
-import { useTranslations } from "next-intl";
+import Link from "next/link";
 
 const HeaderBottom = () => {
     const { data, isLoading, isError } = getCategories();
@@ -25,7 +25,7 @@ const HeaderBottom = () => {
     }
 
     return (
-        <div className="containers">
+        <div className="containers hidden sm:block">
             <ul className="flex justify-between items-center gap-[20px] py-[20px] cursor-pointer">
                 {isLoading
                     ? Array.from({ length: 9 }).map((_, i) => (
@@ -35,12 +35,13 @@ const HeaderBottom = () => {
                           />
                       ))
                     : data?.map((category: any) => (
-                          <li
+                          <Link
+                              href={`/product?category=${category.id}`}
                               className="text-[#545D6A] hover:text-[#134E9B] transition duration-300 ease-in-out"
                               key={category.id}
                           >
                               {category.name}
-                          </li>
+                          </Link>
                       ))}
             </ul>
         </div>

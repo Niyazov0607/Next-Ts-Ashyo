@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ChangeEvent, use, useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import Button from "./Button";
 import { ArrowDown, SearchIcon } from "@/assets/icons";
 import Input from "./Input";
@@ -18,6 +18,7 @@ import { instance } from "@/hooks/instance";
 import Debounce from "@/hooks/debaunce";
 import { HeaderFormType } from "@/types/ActionType";
 import { Skeleton } from "./ui/skeleton";
+import { useSearchParams, useRouter } from "next/navigation";
 
 const HeaderForm = () => {
     const t = useTranslations("HeaderTop");
@@ -25,6 +26,22 @@ const HeaderForm = () => {
     const [searchValue, setSearchValue] = useState<string>("");
     const [showSearch, setShowSearch] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [activeCategoryId, setActiveCategoryId] = useState<number | null>(
+        null
+    ); // Track active category
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+    const router = useRouter();
+    const searchParams = useSearchParams();
+
+    // Check for active category from URL
+    const activeCategory = searchParams.get("category");
+
+    useEffect(() => {
+        if (activeCategory) {
+            setActiveCategoryId(Number(activeCategory));
+        }
+    }, [activeCategory]);
+
     function handleSearch(e: ChangeEvent<HTMLInputElement>) {
         setSearchValue(e.target.value);
         setIsLoading(true);
@@ -60,24 +77,26 @@ const HeaderForm = () => {
 
     return (
         <div className="flex items-center gap-5 relative">
-            <DropdownMenu>
+            <DropdownMenu open={dropdownOpen} onOpenChange={setDropdownOpen}>
                 <DropdownMenuTrigger asChild>
                     <div>
-                        <DropdownMenuTrigger asChild>
-                            <Button
-                                text={t("category")}
-                                iconPosition="right"
-                                icon={<ArrowDown />}
-                            />
-                        </DropdownMenuTrigger>
+                        <Button
+                            text={t("category")}
+                            iconPosition="right"
+                            icon={<ArrowDown />}
+                        />
                     </div>
                 </DropdownMenuTrigger>
 
                 <DropdownMenuContent
-                    className="w-[1185px] h-[570px] flex z-50 ml-[-230px] bg-white p-0 rounded-none"
+                    className="flex flex-col md:flex-row bg-white z-50 p-0 rounded-none 
+                    w-full md:w-[1185px] 
+                    h-screen md:h-[570px] 
+                    ml-0 md:ml-[-230px] 
+                    overflow-y-auto"
                     align="start"
                 >
-                    <div className="w-1/4 pl-10 pt-[20px] space-y-4 bg-[#EBEFF3] h-full">
+                    <div className="w-full md:w-1/4 px-4 md:pl-10 pt-[20px] space-y-4 bg-[#EBEFF3] h-full">
                         {isLoading && (
                             <div className="text-sm text-gray-500">
                                 Yuklanmoqda...
@@ -93,78 +112,36 @@ const HeaderForm = () => {
                             data?.map((item: any) => (
                                 <div
                                     key={item.id}
-                                    className="flex items-center gap-2 text-sm text-gray-700  hover:text-blue-500 cursor-pointer"
+                                    className={`flex items-center gap-2 text-sm cursor-pointer 
+                                    ${
+                                        activeCategoryId === item.id
+                                            ? "text-[#134E9B] font-semibold"
+                                            : "text-gray-700 hover:text-[#134E9B] hover:bg-white py-[5px] px-[10px] rounded-[6px] duration-120"
+                                    }`}
+                                    onClick={() => {
+                                        setActiveCategoryId(item.id); // Set active category
+                                        router.push(
+                                            `/product?category=${item.id}`
+                                        );
+                                        setDropdownOpen(false); // Close dropdown after click
+                                    }}
                                 >
-                                    <Link
-                                        href={`/category/${item.id}`}
-                                        className="flex items-center gap-2"
-                                    >
-                                        <Image
-                                            className="w-[24px] h-[24px]"
-                                            src={`${IMG_API}/${item.icon}`}
-                                            alt="category"
-                                            width={24}
-                                            height={24}
-                                            priority
-                                        />
-                                        {item.name}
-                                    </Link>
+                                    <Image
+                                        className="w-[24px] h-[24px]"
+                                        src={`${IMG_API}/${item.icon}`}
+                                        alt="category"
+                                        width={24}
+                                        height={24}
+                                        priority
+                                    />
+                                    {item.name}
                                 </div>
                             ))}
-                    </div>
-
-                    <div className="w-3/4 pl-6 grid grid-cols-2 gap-10 pt-[20px]">
-                        <div>
-                            <h3 className="font-semibold mb-2">Smartfonlar</h3>
-                            <ul className="space-y-1 text-sm text-gray-700">
-                                {[
-                                    "Oppo smartfonlar",
-                                    "Vivo smartfonlar",
-                                    "Realmi smartfonlar",
-                                    "Redmi smartfonlar",
-                                    "Xiaomi smartfonlar",
-                                    "Artel smartfonlar",
-                                    "Samsung smartfonlar",
-                                    "Iphone smartfonlar",
-                                    "Nokia smartfonlar",
-                                ].map((item, idx) => (
-                                    <li
-                                        key={idx}
-                                        className="hover:text-blue-500 cursor-pointer"
-                                    >
-                                        {item}
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-
-                        {/* Accessories */}
-                        <div>
-                            <h3 className="font-semibold mb-2">
-                                Telefon aksessurlari
-                            </h3>
-                            <ul className="space-y-1 text-sm text-gray-700">
-                                {[
-                                    "Quvvatlagich",
-                                    "Telefon g'iloflari",
-                                    "Quloqchinlar",
-                                    "Xotira chiplari",
-                                    "Ekran himoya oynasi",
-                                ].map((item, idx) => (
-                                    <li
-                                        key={idx}
-                                        className="hover:text-blue-500 cursor-pointer"
-                                    >
-                                        {item}
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
                     </div>
                 </DropdownMenuContent>
             </DropdownMenu>
 
-            <div className="w-[518px] relative ">
+            <div className="md:w-[518px] relative w-[230px]">
                 <Input
                     value={searchValue}
                     onchange={handleSearch}

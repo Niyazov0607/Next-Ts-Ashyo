@@ -2,11 +2,11 @@ import {
     AppStoreIcon,
     FacebookIcon,
     GoogleIcon,
-    InputMessageIcon,
     InstagramIcon,
     TelegramIcon,
     TwitterIcon,
     YoutubeIcon,
+    InputMessageIcon,
 } from "@/assets/icons";
 import Input from "@/components/Input";
 import React from "react";
@@ -14,76 +14,96 @@ import Link from "next/link";
 
 const Footer = () => {
     return (
-        <div className="containers mt-[100px] flex items-center justify-between gap-[100px] mt-[60px] mb-[89px]">
-            <div>
-                <h2>Bizning ijtimoiy tarmoqlarda</h2>
-                <div className="flex items-center  gap-[20px] mt-[20px]">
-                    <p className="bg-[#F5F5F5] w-[44px] h-[40px] items-center justify-center flex rounded-[6px]">
-                        <FacebookIcon />
-                    </p>
-                    <p className="bg-[#F5F5F5] w-[44px] h-[40px] items-center justify-center flex rounded-[6px]">
-                        <YoutubeIcon />
-                    </p>
-                    <p className="bg-[#F5F5F5] w-[44px] h-[40px] items-center justify-center flex rounded-[6px]">
-                        <TelegramIcon />
-                    </p>
-                    <p className="bg-[#F5F5F5] w-[44px] h-[40px] items-center justify-center flex rounded-[6px]">
-                        <TwitterIcon />
-                    </p>
-                    <p className="bg-[#F5F5F5] w-[44px] h-[40px] items-center justify-center flex rounded-[6px]">
-                        <InstagramIcon />
-                    </p>
-                </div>
-                <p>Mobil ilovani yuklab oling</p>
+        <footer className="bg-white pt-10 pb-6 text-sm text-[#000000B2]">
+            <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 px-6">
+                {/* Left Column */}
+                <div>
+                    <h3 className="font-semibold mb-3">
+                        Bizning ijtimoiy tarmoqlarda
+                    </h3>
+                    <div className="flex gap-3 mb-6">
+                        <div className="bg-[#F5F5F5] w-10 h-10 flex items-center justify-center rounded-md">
+                            <FacebookIcon />
+                        </div>
+                        <div className="bg-[#F5F5F5] w-10 h-10 flex items-center justify-center rounded-md">
+                            <YoutubeIcon />
+                        </div>
+                        <div className="bg-[#F5F5F5] w-10 h-10 flex items-center justify-center rounded-md">
+                            <TelegramIcon />
+                        </div>
+                        <div className="bg-[#F5F5F5] w-10 h-10 flex items-center justify-center rounded-md">
+                            <TwitterIcon />
+                        </div>
+                        <div className="bg-[#F5F5F5] w-10 h-10 flex items-center justify-center rounded-md">
+                            <InstagramIcon />
+                        </div>
+                    </div>
 
-                <div className="flex items-center gap-[20px] mt-[20px]">
-                    <p className="bg-[#F5F5F5] w-[188px] h-[66px] items-center justify-center flex  rounded-[6px]  gap-[10px]">
-                        <AppStoreIcon />
-                        <span>App Store </span>
-                    </p>
-                    <p className="bg-[#F5F5F5] w-[188px] h-[66px] items-center justify-center flex  rounded-[6px]  gap-[10px]">
-                        <GoogleIcon />
-                        <span>Google Play</span>
+                    <h3 className="font-semibold mb-3">
+                        Mobil ilovani yuklab oling
+                    </h3>
+                    <div className="flex gap-4 mb-4">
+                        <div className="bg-[#F5F5F5] w-[160px] h-[50px] flex items-center justify-center rounded-md gap-2">
+                            <AppStoreIcon />
+                            <span>App Store</span>
+                        </div>
+                        <div className="bg-[#F5F5F5] w-[160px] h-[50px] flex items-center justify-center rounded-md gap-2">
+                            <GoogleIcon />
+                            <span>Google Play</span>
+                        </div>
+                    </div>
+
+                    <p className="text-xs mt-6 text-[#00000080]">
+                        © 2022 Ashyo ro’hatdan otgan litsenzalangan bu brend.
                     </p>
                 </div>
-                <p className="mt-[57px]">
-                    © 2022 Ashyo ro’hatdan otgan litsenzalangan bu brend.
-                </p>
-            </div>
-            <div className="py-[10px] flex flex-col gap-[10px]">
-                <p>Menyu</p>
-                <Link href="/using" className="text-[#000000B2]">
-                    Foydalanish shartlari
-                </Link>
-                <Link href="/privacy" className="text-[#000000B2]">
-                    Maxfiylik va hafsizlik siyosati
-                </Link>
-                <Link href="/return-policy" className="text-[#000000B2]">
-                    Mahsulotlarni va tovarlarni <br />
-                    qaytarish siyosati
-                </Link>
-                <Link href="/contact" className="text-[#000000B2]">
-                    Biz bilan aloqa
-                </Link>
-            </div>
-            <div>
-                <p>Aloqa</p>
-                <Link href="/" className="text-black">
-                    +998 (71) 123-45-67
-                </Link>
-                <Link href="/">Savolingiz bormi?</Link>
-                <div className=" items-center gap-[20px] mt-[20px] relative">
-                    <Input
-                        placeholder=" O’zingiz qiziqtirgan savollarni bering"
-                        extraStyle="w-[320px]"
-                        type="text"
-                    />
-                    <button className="absolute right-2 top-4  w-[18px] items-center justify-center flex rounded-[6px]">
-                        <InputMessageIcon />
-                    </button>
+
+                {/* Center Column */}
+                <div>
+                    <h3 className="font-semibold mb-3">Menyu</h3>
+                    <ul className="flex flex-col gap-3 text-black">
+                        <li>
+                            <Link href="/">Ashyo haqida</Link>
+                        </li>
+                        <li>
+                            <Link href="/using">Foydalanish shartlari</Link>
+                        </li>
+                        <li>
+                            <Link href="/privacy">
+                                Maxfiylik va hafsizlik siyosati
+                            </Link>
+                        </li>
+                        <li>
+                            <Link href="/return-policy">
+                                Mahsulotlarni va tovarlarni qaytarish siyosati
+                            </Link>
+                        </li>
+                        <li>
+                            <Link href="/contact">Biz bilan aloqa</Link>
+                        </li>
+                    </ul>
+                </div>
+
+                {/* Right Column */}
+                <div>
+                    <h3 className="font-semibold mb-3">Aloqa</h3>
+                    <p className="text-lg font-semibold mb-2 text-black">
+                        +998 (71) 123-45-67
+                    </p>
+                    <p className="mb-3">Savolingiz bormi?</p>
+                    <div className="relative">
+                        <Input
+                            placeholder="O’zingiz qiziqtirgan savollarni bering"
+                            extraStyle="w-full bg-[#F5F5F5] pl-3 pr-10 py-2 rounded-md"
+                            type="text"
+                        />
+                        <button className="absolute right-3 top-2.5">
+                            <InputMessageIcon />
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
+        </footer>
     );
 };
 

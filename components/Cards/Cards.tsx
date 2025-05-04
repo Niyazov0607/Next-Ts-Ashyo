@@ -46,9 +46,11 @@ const Cards: FC<{ title: string; api: string }> = ({ title, api }) => {
     const router = useRouter();
 
     return (
-        <div className="cards pb-[80px] justify-center items-center">
+        <div className="cards pb-[80px] justify-center items-center ">
             <div className="containers !mb-[50px]">
-                <h2 className="text-[32px] font-[700]">{title}</h2>
+                <h2 className="md:text-[32px] font-[700]  text-[14px]">
+                    {title}
+                </h2>
             </div>
             <Swiper
                 slidesPerView={"auto"}
@@ -69,7 +71,7 @@ const Cards: FC<{ title: string; api: string }> = ({ title, api }) => {
                     : data?.map((item: CardType) => (
                           <SwiperSlide
                               key={item.id}
-                              className="relative flex flex-col justify-center items-center !w-[273px] wrapper ml-[6px] px-[1px]"
+                              className="relative flex flex-col justify-center items-center md:!w-[273px] wrapper md:ml-[6px] px-[1px] !w-[170px] "
                           >
                               <div
                                   onClick={() => router.push(`${item.id}`)}
@@ -92,30 +94,30 @@ const Cards: FC<{ title: string; api: string }> = ({ title, api }) => {
                               <div>
                                   <p
                                       onClick={() => router.push(`${item.id}`)}
-                                      className="line-clamp-2 text-[16px] mt-[16px] mb-[28px] text-[#545D6A] cursor-pointer"
+                                      className="line-clamp-2 md:text-[16px] mt-[16px] mb-[28px] text-[#545D6A] cursor-pointer text-[12px]"
                                   >
                                       {item.description}
                                   </p>
-                                  <div className="flex items-end gap-[10px]">
-                                      <div>
+                                  <div className="md:flex items-end gap-[10px]">
+                                      <div className="text-[15px]">
                                           <strong>
                                               {formatNumberWithSpaces(
                                                   item.price
                                               )}{" "}
                                               uzs
                                           </strong>
-                                          <p className="mt-[10px] text-[#F02C96] bg-[#F02C961A] rounded-[3px] py-[7px] px-[10px] text-[14px]">
+                                          <p className="mt-[10px] text-[#F02C96] bg-[#F02C961A] rounded-[3px] py-[7px] md:px-[10px] px-[7px] md:text-[14px] text-[10px]">
                                               6 oy / 1 200 000 usz
                                           </p>
                                       </div>
                                       <div className="flex gap-[10px]">
                                           <Button
-                                              extraStyle="!p-0 w-[52px] h-[52px] justify-center !text-[#545D6A] bg-transparent hover:bg-gray-100 border-[1px] rounded-[6px]"
+                                              extraStyle="!p-0 md:w-[52px] md:h-[52px] w-[50px] h-[36px] mt-[10px] justify-center !text-[#545D6A] bg-transparent hover:bg-gray-100 border-[1px] rounded-[6px]"
                                               iconPosition="right"
                                               icon={<CompareIcon />}
                                           />
                                           <Button
-                                              extraStyle="!p-0 w-[52px] h-[52px] justify-center border-[1px] border-[#134E9B] rounded-[6px]"
+                                              extraStyle="!p-0 md:w-[52px] md:h-[52px] mt-[10px] w-[112px] h-[36px] justify-center border-[1px] border-[#134E9B] rounded-[6px]"
                                               iconPosition="right"
                                               icon={<ShoppingBag />}
                                           />

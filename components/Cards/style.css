@@ -35,3 +35,6 @@
     transform: translateY(-50%);
 }
 
+.cards {
+    overflow-x: hidden;
+}

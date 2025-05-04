@@ -51,12 +51,12 @@ const Hero = () => {
                 >
                     {data?.map((item: BannersType) => (
                         <SwiperSlide key={item.id}>
-                            <div className="relative w-full h-[500px] flex items-center  justify-between px-8">
+                            <div className="relative w-full h-[500px] flex items-center justify-between px-8">
                                 <div className="max-w-[500px]">
-                                    <h2 className="text-4xl font-black mb-4 text-[#0A1729]">
+                                    <h2 className="md:text-4xl md:font-black mb-4 text-[#0A1729] text-[22px]">
                                         {item.name}
                                     </h2>
-                                    <p className="text-lg text-[#545D6A] mb-6">
+                                    <p className="md:text-lg text-[#545D6A] mb-6 text-[11px]">
                                         {item.description}
                                     </p>
                                     <button className="px-6 py-3 bg-[#134E9B] text-white rounded-md">
@@ -64,7 +64,7 @@ const Hero = () => {
                                     </button>
                                 </div>
                                 <Image
-                                    className="absolute top-0 bottom-0 right-0 object-cover z-0 w-[500px] h-[500px]"
+                                    className="absolute md:top-0 bottom-0 right-0 object-cover absolute top-[55%] z-0 w-[200px] h-[200px] md:w-[500px] md:h-[500px]"
                                     src={`${IMG_API}/${item.image}`}
                                     alt={item.name}
                                     width={550}

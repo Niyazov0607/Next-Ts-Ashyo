@@ -168,3 +168,66 @@
     color: white;
     cursor: pointer;
 }
+
+/* Responsive for Tablets (768px–1023px) */
+@media (max-width: 1023px) {
+    .brandCategory_wrapper {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: auto;
+    }
+
+    .brandCategory-1,
+    .brandCategory-2,
+    .brandCategory-3,
+    .brandCategory-4,
+    .brandCategory-5,
+    .brandCategory-6,
+    .brandCategory-7 {
+        grid-column: span 1 !important;
+        grid-row: auto !important;
+    }
+
+    .brandCategory-4::after {
+        display: none;
+    }
+}
+
+/* Responsive for Mobile (≤767px) */
+@media (max-width: 767px) {
+    .brandCategory_wrapper {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: auto;
+        gap: 8px;
+    }
+
+    .brandCategory-1,
+    .brandCategory-2,
+    .brandCategory-3,
+    .brandCategory-4,
+    .brandCategory-5,
+    .brandCategory-6,
+    .brandCategory-7 {
+        grid-template-columns: span 3 !important;
+        grid-row: auto !important;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        object-fit: contain;
+    }
+
+    .brandCategory-4::after {
+        display: none;
+    }
+
+    .brandCategory-4-child {
+        right: 20% !important;
+    }
+
+    .brandCategory-4 img {
+        width: 100%;
+    }
+
+    .brandCategory-4-border {
+        display: none;
+    }
+}

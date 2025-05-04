@@ -9,7 +9,6 @@ import "./style.css";
 const Brands = () => {
     const { data, isLoading, isError } = getBrands();
 
-
     if (isLoading) return <div>Loading...</div>;
     if (isError) return <div>Error loading brands</div>;
 

@@ -1,4 +1,5 @@
 "use client";
+
 import { FormEvent, useState } from "react";
 import { ProfileIcon } from "@/assets/icons";
 import { Button } from "@/components/ui/button";
@@ -13,6 +14,7 @@ import { Input } from "@/components/ui/input";
 import { Login } from "@/service/AuthLogin";
 import { Register } from "@/service/AuthRegister";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner"; // ✅ Import toast
 
 export function Auth() {
     const [activeTab, setActiveTab] = useState<"login" | "register">("login");
@@ -30,12 +32,15 @@ export function Auth() {
 
         loginMutation(data, {
             onSuccess: () => {
-                console.log("Login success");
+                toast.success("Login successful"); // ✅ Show toast
                 setOpen(false);
-                router.push("/account");
+                router.push("/");
             },
-            onError: (err) => {
-                console.log("Login failed:", err);
+            onError: (err: any) => {
+                toast.error("Login failed", {
+                    description:
+                        err?.response?.data?.message || "Please try again.",
+                });
             },
         });
     }
@@ -49,12 +54,15 @@ export function Auth() {
         };
         registerMutation(data, {
             onSuccess: () => {
-                console.log("Register success");
+                toast.success("Registration successful"); // ✅ Show toast
                 setOpen(false);
-                router.push("/account");
+                router.push("/");
             },
-            onError: (err) => {
-                console.log("Register failed:", err);
+            onError: (err: any) => {
+                toast.error("Registration failed", {
+                    description:
+                        err?.response?.data?.message || "Please try again.",
+                });
             },
         });
     }
@@ -115,9 +123,9 @@ export function Auth() {
                     <DialogTitle className="flex gap-4 justify-center">
                         <button
                             onClick={() => setActiveTab("login")}
-                            className={`text-lg ${
+                            className={`text-lg cursor-pointer ${
                                 activeTab === "login"
-                                    ? "font-bold text-black"
+                                    ? "font-bold text-[#134E9B]"
                                     : "text-gray-500"
                             }`}
                         >
@@ -126,9 +134,9 @@ export function Auth() {
                         <span className="text-gray-300">|</span>
                         <button
                             onClick={() => setActiveTab("register")}
-                            className={`text-lg ${
+                            className={`text-lg cursor-pointer ${
                                 activeTab === "register"
-                                    ? "font-bold text-green-600"
+                                    ? "font-bold text-[#134E9B]"
                                     : "text-gray-500"
                             }`}
                         >

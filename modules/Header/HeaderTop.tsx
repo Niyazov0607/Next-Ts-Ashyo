@@ -15,10 +15,8 @@ import {
     SelectValue,
 } from "@/components/ui/select";
 
-// Declare allowed languages
 type Language = "uz" | "ru" | "en";
 
-// Runtime validation function
 function isValidLang(value: string): value is Language {
     return ["uz", "ru", "en"].includes(value);
 }
@@ -48,11 +46,10 @@ const HeaderTop = () => {
         });
     }
 
-    // Optional: Prevent rendering until client is mounted to avoid flicker
     if (!isMounted) return null;
 
     return (
-        <div className="w-full bg-[#EBEFF3] py-[11px] text-[#545D6A]">
+        <div className="w-full bg-[#EBEFF3] py-[11px] text-[#545D6A] hidden sm:block">
             <div className="containers flex justify-between items-center">
                 <nav className="flex items-center gap-[28px]">
                     <Link href="/" className="flex items-center gap-2">
@@ -62,10 +59,10 @@ const HeaderTop = () => {
                     <Link href="/about" className="flex items-center gap-2">
                         {t("about")}
                     </Link>
-                    <Link href="/contact" className="flex items-center gap-2">
+                    <Link href="/product" className="flex items-center gap-2">
                         {t("products")}
                     </Link>
-                    <Link href="/blog" className="flex items-center gap-2">
+                    <Link href="/contact" className="flex items-center gap-2">
                         {t("contacts")}
                     </Link>
                 </nav>
