@@ -1,10 +1,10 @@
 "use client";
 import { API, IMG_API } from "@/hooks/getEnv";
-import { getCategories } from "@/service/getCategories";
 import React from "react";
 import "./style.css";
 import { CategoryType } from "@/types/CategoryType";
 import Image from "next/image";
+import { getCategories } from "@/service/getCategories";
 
 function CategoryBrand() {
     const { data, isLoading } = getCategories();

@@ -7,10 +7,10 @@ import "swiper/css";
 import "swiper/css/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
-import { GetBanners } from "@/service/getBanners";
 import Image from "next/image";
 import { IMG_API } from "@/hooks/getEnv";
 import { BannersType } from "@/types/BannersType";
+import { GetBanners } from "@/service/getBanners";
 
 const Hero = () => {
     const { data, isLoading, isError } = GetBanners();

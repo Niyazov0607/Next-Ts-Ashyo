@@ -6,7 +6,6 @@ import "swiper/css/pagination";
 import "./style.css";
 import { Navigation } from "swiper/modules";
 import { IMG_API } from "@/hooks/getEnv";
-import { getCards } from "@/service/getCards";
 import { CardType } from "@/types/CardsType";
 import Image from "next/image";
 import Button from "../Button";
@@ -14,6 +13,7 @@ import { CompareIcon } from "@/assets/icons";
 import { ShoppingBag } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useRouter } from "@/i18n/navigation";
+import { getCards } from "@/service/getCards";
 
 function formatNumberWithSpaces(num: number | string): string {
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");

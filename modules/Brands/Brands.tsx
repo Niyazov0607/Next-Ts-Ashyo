@@ -1,10 +1,10 @@
 "use client";
 import { IMG_API } from "@/hooks/getEnv";
-import { getBrands } from "@/service/getBrands";
 import { BrandsType } from "@/types/BrandsType";
 import Image from "next/image";
 import React from "react";
 import "./style.css";
+import { getBrands } from "@/service/getBrands";
 
 const Brands = () => {
     const { data, isLoading, isError } = getBrands();

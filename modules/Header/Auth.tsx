@@ -11,10 +11,10 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { Login } from "@/service/AuthLogin";
-import { Register } from "@/service/AuthRegister";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner"; // ✅ Import toast
+import { Login } from "@/service/AuthLogin";
+import { Register } from "@/service/AuthRegister";
 
 export function Auth() {
     const [activeTab, setActiveTab] = useState<"login" | "register">("login");
