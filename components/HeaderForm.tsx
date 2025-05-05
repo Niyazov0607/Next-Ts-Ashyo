@@ -28,12 +28,13 @@ const HeaderForm = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [activeCategoryId, setActiveCategoryId] = useState<number | null>(
         null
-    ); // Track active category
+    );
     const [dropdownOpen, setDropdownOpen] = useState(false);
+    const [searchResult, setSearchResult] = useState<HeaderFormType[]>([]);
+
     const router = useRouter();
     const searchParams = useSearchParams();
 
-    // Check for active category from URL
     const activeCategory = searchParams.get("category");
 
     useEffect(() => {
@@ -72,8 +73,6 @@ const HeaderForm = () => {
             setIsLoading(false);
         }
     }, [searchWaitingValue]);
-
-    const [searchResult, setSearchResult] = useState<HeaderFormType[]>([]);
 
     return (
         <div className="flex items-center gap-5 relative">
@@ -119,11 +118,11 @@ const HeaderForm = () => {
                                             : "text-gray-700 hover:text-[#134E9B] hover:bg-white py-[5px] px-[10px] rounded-[6px] duration-120"
                                     }`}
                                     onClick={() => {
-                                        setActiveCategoryId(item.id); // Set active category
+                                        setActiveCategoryId(item.id);
                                         router.push(
                                             `/product?category=${item.id}`
                                         );
-                                        setDropdownOpen(false); // Close dropdown after click
+                                        setDropdownOpen(false);
                                     }}
                                 >
                                     <Image
@@ -141,7 +140,22 @@ const HeaderForm = () => {
                 </DropdownMenuContent>
             </DropdownMenu>
 
-            <div className="md:w-[518px] relative w-[230px]">
+            <form
+                onSubmit={(e) => {
+                    e.preventDefault();
+                    const matchedCategory = data?.find((cat: any) =>
+                        cat.name
+                            .toLowerCase()
+                            .includes(searchValue.toLowerCase())
+                    );
+                    if (matchedCategory) {
+                        router.push(`/product?category=${matchedCategory.id}`);
+                        setShowSearch(false);
+                        setIsLoading(false);
+                    }
+                }}
+                className="md:w-[518px] relative w-[230px]"
+            >
                 <Input
                     value={searchValue}
                     onchange={handleSearch}
@@ -189,7 +203,7 @@ const HeaderForm = () => {
                               </li>
                           ))}
                 </ul>
-            </div>
+            </form>
         </div>
     );
 };
