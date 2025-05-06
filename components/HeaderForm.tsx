@@ -154,7 +154,7 @@ const HeaderForm = () => {
                         setIsLoading(false);
                     }
                 }}
-                className="md:w-[518px] relative w-[230px]"
+                className="md:w-[518px] relative w-[230px] text-[10px] md:text-[13px]"
             >
                 <Input
                     value={searchValue}
@@ -164,7 +164,7 @@ const HeaderForm = () => {
                     extraStyle="!w-full"
                 />
                 <Button
-                    extraStyle="!w-[58px] !h-[58px] !p-0 absolute top-0 bottom-0 right-0"
+                    extraStyle="md:!w-[55px] md:!h-[54px] !p-0 absolute top-0 bottom-0 right-0 !w-[45px] !h-[49px]"
                     icon={<SearchIcon />}
                     iconPosition="right"
                 />

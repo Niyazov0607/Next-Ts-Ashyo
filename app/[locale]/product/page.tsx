@@ -11,8 +11,8 @@ import { IMG_API } from "@/hooks/getEnv";
 import { useRouter, useSearchParams } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Slider } from "@/components/ui/slider";
-import { getCategories } from "@/service/getCategories";
 import { getBrands } from "@/service/getBrands";
+import { getCategories } from "@/service/getCategories";
 
 function formatNumberWithSpaces(num: number | string): string {
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");

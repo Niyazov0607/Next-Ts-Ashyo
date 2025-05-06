@@ -110,7 +110,7 @@ const Cards: FC<{ title: string; api: string }> = ({ title, api }) => {
                                               6 oy / 1 200 000 usz
                                           </p>
                                       </div>
-                                      <div className="flex gap-[10px]">
+                                      <div className="flex gap-[5px] md:gap-[10px]">
                                           <Button
                                               extraStyle="!p-0 md:w-[52px] md:h-[52px] w-[50px] h-[36px] mt-[10px] justify-center !text-[#545D6A] bg-transparent hover:bg-gray-100 border-[1px] rounded-[6px]"
                                               iconPosition="right"
